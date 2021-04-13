@@ -27,13 +27,19 @@ export default function StatsPage() {
                 limit: limit
             }
         }).then(res => {
-            // console.log(res.data);
+            console.log("status:"+res.status);
+            
+            if(res.status ===200){
             console.log("resoluc:" + JSON.stringify(res.data.payload));
             setObject({ payload: res.data.payload });
             setSize(res.data.size);
+        }else{
+            alert('Something went wrong');
+        }
         }, (error) => {
             console.log(error);
-        });
+           
+        })
     }
     return (
         <div>

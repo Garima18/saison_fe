@@ -24,12 +24,20 @@ export default function StartPage() {
             url: baseUrl + "verify/" + val,
             method: 'GET',
         }).then(res => {
-            // console.log(res.data);
+            console.log("status:"+res.status);
+            
+            if(res.status ===200){
+
             console.log("resoluc:" + res.data.payload.bank);
             setScheme(res.data.payload.scheme);
             setType(res.data.payload.type);
             setBank(res.data.payload.bank);
+            }else{
+                alert('Something went wrong');
+            }
         }, (error) => {
+            alert('Something went wrong');
+           
             console.log(error);
         });
     }
