@@ -16,7 +16,7 @@ export default function StartPage() {
         const num = document.getElementById("cardnumber").value;
         setCardNumber(num);
     }
-  
+
 
 
     const verifyCard = (val) => {
@@ -24,37 +24,43 @@ export default function StartPage() {
             url: baseUrl + "verify/" + val,
             method: 'GET',
         }).then(res => {
-            console.log("status:"+res.status);
-            
-            if(res.status ===200){
+            console.log("status:" + res.status);
 
-            console.log("resoluc:" + res.data.payload.bank);
-            setScheme(res.data.payload.scheme);
-            setType(res.data.payload.type);
-            setBank(res.data.payload.bank);
-            }else{
+            if (res.status === 200) {
+
+                console.log("resoluc:" + res.data.payload.bank);
+                setScheme(res.data.payload.scheme);
+                setType(res.data.payload.type);
+                setBank(res.data.payload.bank);
+            } else {
                 alert('Something went wrong');
             }
         }, (error) => {
             alert('Something went wrong');
-           
+
             console.log(error);
         });
     }
 
-   
+
 
     return (
         <div>
             <Header />
             <div className="cardDiv">
-                <textarea
+                <input type="number"
+                    className="enterBox"
+                    placeholder="CardNumber"
+                    id="cardnumber"
+                    onChange={() => updateCardNumber()} />
+
+                {/* <textarea 
                     rows="1"
                     cols="50" placeholder="CardNumber"
                     id="cardnumber"
                     onChange={() => updateCardNumber()}
                     className="enterBox"
-                ></textarea>
+                ></textarea> */}
 
                 <button onClick={() => verifyCard(cardNumber)} className="cardButton">Submit</button>
                 <div className="contentDiv">
